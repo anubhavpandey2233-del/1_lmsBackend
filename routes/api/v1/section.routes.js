@@ -13,12 +13,12 @@ router.post('/postSection',(req,res)=>{
 })
 
 router.put('/updateSection/:id',(req,res)=>{
-    console.log(req.id);
+    console.log(req.params.id);
     res.send("Update Data")
 })
 
 router.delete('/deleteSection/:id',(req,res)=>{
-    console.log(req.id);
+    console.log(req.params.id);
     res.send("Delete Data")
 })
 module.exports=router

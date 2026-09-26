@@ -12,13 +12,13 @@ router.post('/postCourse',(req,res)=>{
     res.send("Post Data")
 })
 
-router.put('/postCourse/:id',(req,res)=>{
-    console.log(req.id);
+router.put('/updateCourse/:id',(req,res)=>{
+    console.log(req.params.id);
     res.send("Update Data")
 })
 
 router.delete('/deleteCourse/:id',(req,res)=>{
-    console.log(req.id);
+    console.log(req.params.id);
     res.send("Delete Data")
 })
 module.exports=router
