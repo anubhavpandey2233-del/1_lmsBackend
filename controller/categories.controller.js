@@ -56,9 +56,11 @@ const getAllCategories = async (req, res) => {
 }
 
 const addCategories = async (req, res) => {
+     console.log(req.body);
+     
     const AddCategory = await Categories.create(req.body);
 
-    console.log(req.body);
+   
 
 
     try {
@@ -98,7 +100,7 @@ const deleteCategories = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-            data: DeleteCategory,
+            data    : DeleteCategory,
             message: "Category deleted"
         })
 
