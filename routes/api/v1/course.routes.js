@@ -1,24 +1,18 @@
 const express=require("express")
+const { getAllCourses, addCourses, deleteCourse,editCourse, getCourse, searchbyname } = require("../../../controller/courses.controller")
 const router=express.Router()
 
 router.use(express.json())
 
-router.get('/getCourse',(req,res)=>{
-    res.send("Get Data")
-})
+router.get('/getCourse/:_id',getCourse)
 
-router.post('/postCourse',(req,res)=>{
-    console.log(req.body);
-    res.send("Post Data")
-})
+router.get('/getAllCourse',getAllCourses)
 
-router.put('/updateCourse/:id',(req,res)=>{
-    console.log(req.params.id);
-    res.send("Update Data")
-})
+router.get('/getCourseByName/:name',searchbyname)
 
-router.delete('/deleteCourse/:id',(req,res)=>{
-    console.log(req.params.id);
-    res.send("Delete Data")
-})
+router.post('/postCourse',addCourses)
+
+router.put('/updateCourse/:_id',editCourse)
+
+router.delete('/deleteCourse/:_id',deleteCourse)
 module.exports=router

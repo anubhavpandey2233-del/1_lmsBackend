@@ -89,7 +89,10 @@ const addCategories = async (req, res) => {
 const deleteCategories = async (req, res) => {
     try {
 
-        const DeleteCategory = await Categories.findOneAndDelete(req.params._id)
+        console.log("req.params._idreq.params._id", req.params._id);
+        
+
+        const DeleteCategory = await Categories.findByIdAndDelete(req.params._id)
 
         if (!DeleteCategory) {
             return res.status(400).json({
@@ -145,44 +148,44 @@ const editCategories = async (req, res) => {
     }
 }
 
-const searchbyname = async (req, res) => {
+    const searchbyname = async (req, res) => {
 
-    try {
+        try {
 
-        const CategoryData = await Categories.aggregate(
-            [
-                {
-                    $match: {
-                        name: req.params.name
+            const CategoryData = await Categories.aggregate(
+                [
+                    {
+                        $match: {
+                            name: req.params.name
+                        }
                     }
-                }
-            ]
+                ]
 
-        )
+            )
 
 
-        if (CategoryData.length === 0) {
-            return res.status(400).json({
+            if (CategoryData.length === 0) {
+                return res.status(400).json({
+                    success: false,
+                    data: [],
+                    message: "Data not found"
+                })
+            }
+
+            res.status(200).json({
+                success: true,
+                data: CategoryData,
+                message: "Data found"
+            })
+
+        } catch (error) {
+            res.status(500).json({
                 success: false,
                 data: [],
-                message: "Data not found"
+                message: "Internal server error" + error.message
             })
         }
-
-        res.status(200).json({
-            success: true,
-            data: CategoryData,
-            message: "Data found"
-        })
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            data: [],
-            message: "Internal server error" + error.message
-        })
     }
-}
 
 module.exports = {
     getCategory,

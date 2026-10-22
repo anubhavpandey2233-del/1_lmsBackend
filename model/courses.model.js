@@ -4,7 +4,7 @@ const coursesSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required,
+           required:true,
             trim: true,
 
         },
@@ -14,17 +14,16 @@ const coursesSchema = new mongoose.Schema(
         },
         fees: {
             type: Number,
-            required,
+            required:true,
             trim: true
         },
         duration: {
             type: String,
-            required,
+            required:true,
             trim: true
         },
         intrucotor_id: {
             type: mongoose.Types.ObjectId,
-            required,
             trim: true
         },
         isActive: {
