@@ -56,11 +56,11 @@ const getAllCategories = async (req, res) => {
 }
 
 const addCategories = async (req, res) => {
-     console.log(req.body);
-     
-    const AddCategory = await Categories.create(req.body);
+    console.log(req.body);
+    console.log(req.file);
 
-   
+
+    const AddCategory = await Categories.create({ ...req.body, category_img: req?.file?.path });
 
 
     try {
@@ -90,7 +90,7 @@ const deleteCategories = async (req, res) => {
     try {
 
         console.log("req.params._idreq.params._id", req.params._id);
-        
+
 
         const DeleteCategory = await Categories.findByIdAndDelete(req.params._id)
 
@@ -103,7 +103,7 @@ const deleteCategories = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-            data    : DeleteCategory,
+            data: DeleteCategory,
             message: "Category deleted"
         })
 
@@ -148,44 +148,44 @@ const editCategories = async (req, res) => {
     }
 }
 
-    const searchbyname = async (req, res) => {
+const searchbyname = async (req, res) => {
 
-        try {
+    try {
 
-            const CategoryData = await Categories.aggregate(
-                [
-                    {
-                        $match: {
-                            name: req.params.name
-                        }
+        const CategoryData = await Categories.aggregate(
+            [
+                {
+                    $match: {
+                        name: req.params.name
                     }
-                ]
+                }
+            ]
 
-            )
+        )
 
 
-            if (CategoryData.length === 0) {
-                return res.status(400).json({
-                    success: false,
-                    data: [],
-                    message: "Data not found"
-                })
-            }
-
-            res.status(200).json({
-                success: true,
-                data: CategoryData,
-                message: "Data found"
-            })
-
-        } catch (error) {
-            res.status(500).json({
+        if (CategoryData.length === 0) {
+            return res.status(400).json({
                 success: false,
                 data: [],
-                message: "Internal server error" + error.message
+                message: "Data not found"
             })
         }
+
+        res.status(200).json({
+            success: true,
+            data: CategoryData,
+            message: "Data found"
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            data: [],
+            message: "Internal server error" + error.message
+        })
     }
+}
 
 module.exports = {
     getCategory,
