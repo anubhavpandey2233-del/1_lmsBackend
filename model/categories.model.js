@@ -13,7 +13,7 @@ const categoriesSchema = new mongoose.Schema(
             trim: true
         },
         category_img: {
-            type: String,
+            type: Array,
             trim: true
         }
     },

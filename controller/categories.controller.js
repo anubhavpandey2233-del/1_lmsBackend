@@ -57,9 +57,15 @@ const getAllCategories = async (req, res) => {
 
 const addCategories = async (req, res) => {
     console.log(req.body);
-    console.log(req.files);
+    console.log("Controller", req?.files);
 
-    const AddCategory = await Categories.create({ ...req.body, category_img: req?.files?.path });
+    let allFiles = []
+
+    req?.files?.map((v) => {
+        allFiles?.push(v.path)
+    })
+
+    const AddCategory = await Categories.create({ ...req.body, category_img: allFiles });
 
     try {
         if (!AddCategory) {
