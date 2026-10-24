@@ -10,7 +10,7 @@ router.get('/getCategory/:_id',getCategory)
 
 router.get('/getAllCategory',getAllCategories)
 
-router.post('/postCategory',upload.single('category_img'),addCategories) //upload.single uploads inly single img
+router.post('/postCategory',upload.array('category_img',6),addCategories) //upload.single uploads inly single img
 
 router.put('/updateCategory/:_id',editCategories)
 
