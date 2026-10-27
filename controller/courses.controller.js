@@ -56,10 +56,16 @@ const getCourse = async (req, res) => {
 const addCourses = async (req, res) => {
     console.log(req.body);
 
-    const AddCourse = await Courses.create(req.body);
 
+    console.log("Course Controller", req?.files);
 
+    let allFiles = []
 
+    req?.files?.map((v) => {
+        allFiles?.push(v.path)
+    })
+
+    const AddCourse = await Courses.create({ ...req.body, course_img: allFiles });
 
     try {
         if (!AddCourse) {

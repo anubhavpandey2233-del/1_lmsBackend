@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 
 const coursesSchema = new mongoose.Schema(
     {
+        category: {
+            type: String,
+            required: true,
+            trim: true,
+        },
         name: {
             type: String,
-           required:true,
+            required: true,
             trim: true,
 
         },
@@ -14,16 +19,11 @@ const coursesSchema = new mongoose.Schema(
         },
         fees: {
             type: Number,
-            required:true,
+            required: true,
             trim: true
         },
-        duration: {
-            type: String,
-            required:true,
-            trim: true
-        },
-        intrucotor_id: {
-            type: mongoose.Types.ObjectId,
+        course_img: {
+            type: Array,
             trim: true
         },
         isActive: {
@@ -32,8 +32,8 @@ const coursesSchema = new mongoose.Schema(
 
     },
     {
-        timestamps:true,
-        versionKey:false
+        timestamps: true,
+        versionKey: false
     }
 );
 
