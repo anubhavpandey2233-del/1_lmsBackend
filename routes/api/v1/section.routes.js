@@ -1,24 +1,14 @@
-const express=require("express")
-const router=express.Router()
+const express = require("express")
+const { getAllSection, addSection, editSection, deleteSection } = require("../../../controller/section.controller")
+const router = express.Router()
 
 router.use(express.json())
 
-router.get('/getSection',(req,res)=>{
-    res.send("Get Data")
-})
+router.get('/getSection', getAllSection)
 
-router.post('/postSection',(req,res)=>{
-    console.log(req.body);
-    res.send("Post Data")
-})
+router.post('/postSection', addSection)
 
-router.put('/updateSection/:id',(req,res)=>{
-    console.log(req.params.id);
-    res.send("Update Data")
-})
+router.put('/updateSection/:id', editSection)
 
-router.delete('/deleteSection/:id',(req,res)=>{
-    console.log(req.params.id);
-    res.send("Delete Data")
-})
-module.exports=router
+router.delete('/deleteSection/:id', deleteSection)
+module.exports = router

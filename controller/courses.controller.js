@@ -54,42 +54,37 @@ const getCourse = async (req, res) => {
 }
 
 const addCourses = async (req, res) => {
-    console.log(req.body);
-
-
-    console.log("Course Controller", req?.files);
-
-    let allFiles = []
-
-    req?.files?.map((v) => {
-        allFiles?.push(v.path)
-    })
-
-    const AddCourse = await Courses.create({ ...req.body, course_img: allFiles });
-
     try {
-        if (!AddCourse) {
-            return res.status(400).json({
-                success: false,
-                data: null,
-                message: "Course not added"
-            })
-        }
-        res.status(200).json({
+        console.log("Course body:", req.body);
+        console.log("Course files:", req.files);
+
+        let allFiles = [];
+
+        req.files?.forEach((v) => {
+            allFiles.push(v.path);
+        });
+
+        const AddCourse = await Courses.create({
+            ...req.body,
+            course_img: allFiles
+        });
+
+        return res.status(200).json({
             success: true,
             data: AddCourse,
             message: "Course added"
-        })
+        });
 
     } catch (error) {
-        res.status(500).json({
+        console.log("Add Course Error:", error);
+
+        return res.status(500).json({
             success: false,
             data: null,
-            message: "Internal server error" + error.message
-        })
+            message: "Internal server error: " + error.message
+        });
     }
-}
-
+};
 const deleteCourse = async (req, res) => {
     try {
 

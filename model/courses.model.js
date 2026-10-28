@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const coursesSchema = new mongoose.Schema(
     {
-        category: {
-            type: String,
-            required: true,
-            trim: true,
+        category_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Category",
+            required: true
         },
         name: {
             type: String,
