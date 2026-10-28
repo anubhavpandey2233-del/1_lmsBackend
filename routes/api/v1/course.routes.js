@@ -13,7 +13,7 @@ router.get('/getCourseByName/:name',searchbyname)
 
 router.post('/postCourse',upload.array('course_img',6),addCourses)
 
-router.put('/updateCourse/:_id',editCourse)
+router.put('/updateCourse/:_id',upload.array('course_img',6), editCourse)
 
 router.delete('/deleteCourse/:_id',deleteCourse)
 module.exports=router

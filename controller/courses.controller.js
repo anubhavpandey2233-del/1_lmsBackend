@@ -1,4 +1,5 @@
 const Courses = require('../model/courses.model')
+const fs = require('fs');
 
 const getAllCourses = async (req, res) => {
     const courseData = await Courses.find()
@@ -118,24 +119,86 @@ const deleteCourse = async (req, res) => {
 const editCourse = async (req, res) => {
     try {
 
-        const EditCourse = await Courses.findByIdAndUpdate(
-            req.params._id,
-            req.body,
-            { new: true }
-        )
+        //1. only change data
+        //2. change data & change image
 
-        if (!EditCourse) {
-            return res.status(400).json({
-                success: false,
-                data: null,
-                message: "Course not updated"
+
+        //check req.files    2.     log new file come
+        //   no req.files    1.
+
+        console.log("Course updated files....", req.files);
+        
+        
+
+        if (req.files.length > 0) {
+
+            // findById(req.body._id)
+            //delete old images         fs  unlinkSyn
+
+            const oldData = await Courses.findById(req.params._id)
+
+            console.log("req.body._id req.body._id", oldData)
+
+            console.log("Course body bodybodybody :", req.body);
+
+            oldData?.course_img?.map((v) => {
+                fs.unlinkSync(v)
             })
+
+
+            let allFiles = []
+
+            req.files?.forEach((v) => {
+                allFiles.push(v.path);
+            });
+
+
+            const EditCourse = await Courses.findByIdAndUpdate(
+                req.params._id,
+                { ...req.body, course_img: allFiles },
+                { new: true }
+            )
+
+            if (!EditCourse) {
+                return res.status(400).json({
+                    success: false,
+                    data: null,
+                    message: "Course not updated"
+                })
+            }
+            res.status(200).json({
+                success: true,
+                data: EditCourse,
+                message: "Course updated"
+            })
+
+
+
+
+        } else {
+            console.log("bodyyyyyyyyyyyyy", req.body);
+
+            const EditCourse = await Courses.findByIdAndUpdate(
+                req.params._id,
+                req.body,
+                { new: true }
+            )
+
+            if (!EditCourse) {
+                return res.status(400).json({
+                    success: false,
+                    data: null,
+                    message: "Course not updated"
+                })
+            }
+            res.status(200).json({
+                success: true,
+                data: EditCourse,
+                message: "Course updated"
+            })
+
         }
-        res.status(200).json({
-            success: true,
-            data: EditCourse,
-            message: "Course updated"
-        })
+
 
     } catch (error) {
         res.status(500).json({

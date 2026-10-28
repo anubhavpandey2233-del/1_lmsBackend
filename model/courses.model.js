@@ -24,7 +24,7 @@ const coursesSchema = new mongoose.Schema(
         },
         course_img: {
             type: Array,
-            trim: true
+            trim: true,
         },
         isActive: {
             type: Boolean
