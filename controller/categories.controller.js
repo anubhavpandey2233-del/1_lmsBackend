@@ -65,7 +65,7 @@ const addCategories = async (req, res) => {
     //     allFiles?.push(v.path)
     // })
 
-    // const AddCategory = await Categories.create({ ...req.body, category_img: allFiles });
+    const AddCategory = await Categories.create({ ...req.body, category_img: allFiles });
 
     try {
         if (!AddCategory) {

@@ -1,3 +1,4 @@
+const Courses = require('../model/courses.model')
 const Section = require('../model/section.model')
 
 const getAllSection = async (req, res) => {
@@ -155,10 +156,41 @@ const searchbyname = async (req, res) => {
     }
 }
 
+const getCatToCourse = async (req, res) => {
+    const catToCouData = await Courses.find({ category_id: req.params._id })
+    console.log("req.params._id Section",req.params._id);
+    
+    console.log("catToCouDatacatToCouDatacatToCouData",catToCouData);
+    
+    try {
+        if (!catToCouData) {
+            return res.status(400).json({
+                success: false,
+                data: [],
+                message: "Category to Course  not found"
+            })
+        } else {
+            return res.status(200).json({
+                success: true,
+                data: catToCouData,
+                message: "Category to Course Found"
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: [],
+            message: "Internal server error" + error.message
+        })
+    }
+
+}
+
 module.exports = {
     getAllSection,
     addSection,
     deleteSection,
     editSection,
-    searchbyname
+    searchbyname,
+    getCatToCourse
 }
