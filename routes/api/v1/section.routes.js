@@ -8,7 +8,7 @@ router.get('/getSection', getAllSection)
 
 router.post('/postSection', addSection)
 
-router.put('/updateSection/:id', editSection)
+router.put('/updateSection/:_id', editSection)
 
-router.delete('/deleteSection/:id', deleteSection)
+router.delete('/deleteSection/:_id', deleteSection)
 module.exports = router

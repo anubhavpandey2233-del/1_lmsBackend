@@ -21,10 +21,7 @@ const sectionSchema = new mongoose.Schema(
         description: {
             type: String,
             trim: true,
-        },
-        isActive: {
-            type: Boolean
-        },
+        }
 
     },
     {

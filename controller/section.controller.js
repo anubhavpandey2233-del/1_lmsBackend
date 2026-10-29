@@ -103,7 +103,7 @@ const editSection = async (req, res) => {
         }
         res.status(200).json({
             success: true,
-            data: EditCourse,
+            data: EditSection,
             message: "Section updated"
         })
 
