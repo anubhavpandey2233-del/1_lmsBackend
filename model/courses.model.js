@@ -7,6 +7,7 @@ const coursesSchema = new mongoose.Schema(
             ref: "Category",
             required: true
         },
+      
         name: {
             type: String,
             required: true,
