@@ -23,6 +23,10 @@ const coursesSchema = new mongoose.Schema(
             required: true,
             trim: true
         },
+        level:{
+            type: String,
+            trim: true,
+        },
         course_img: {
             type: Array,
             trim: true,
