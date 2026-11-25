@@ -27,6 +27,10 @@ const coursesSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+        language:{
+            type: String,
+            trim: true,
+        },
         course_img: {
             type: Array,
             trim: true,
