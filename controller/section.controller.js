@@ -89,6 +89,8 @@ const deleteSection = async (req, res) => {
 const editSection = async (req, res) => {
     try {
 
+        console.log("Section updated files....", req.files);
+
         const EditSection = await Section.findByIdAndUpdate(
             req.params._id,
             req.body,
