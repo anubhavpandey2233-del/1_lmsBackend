@@ -41,7 +41,7 @@ const contentSchema = new mongoose.Schema(
             trim: true,
         },
         content_file: {
-            type: Array,
+            type: String,
             trim: true,
         },
 

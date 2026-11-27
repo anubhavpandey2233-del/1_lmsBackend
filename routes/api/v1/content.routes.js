@@ -11,6 +11,6 @@ router.post('/postContent', upload.single('content_file'), addContent)
 
 router.put('/updateContent/:_id', editContent)
 
-router.delete('/deleteContent/:_id', deleteContent)
-router.get('/searchbyname/:name',searchbyname)
+router.delete('/deleteContent/:_id', upload.single('content_file'), deleteContent)
+router.get('/searchbyname/:name', searchbyname)
 module.exports = router
