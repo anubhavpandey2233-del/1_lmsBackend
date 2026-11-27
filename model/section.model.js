@@ -4,12 +4,12 @@ const sectionSchema = new mongoose.Schema(
     {
         category_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Category",
+            ref: "Categories",
             required: true
         },
         course_id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Course",
+            ref: "Courses",
             required: true
         },
         name: {
